@@ -21,9 +21,9 @@ const Home = () => {
   return (
     <div className="min-h-screen pt-20">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Animated Background Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-secondary/10 animate-pulse-glow" />
+      <section className="relative min-h-screen flex flex-col justify-between overflow-hidden">
+        {/* Animated Background */}
+        <div className="absolute inset-0 bg-background/90 animate-pulse-glow" />
 
         {/* Floating Particles */}
         {[...Array(20)].map((_, i) => (
@@ -48,17 +48,18 @@ const Home = () => {
           />
         ))}
 
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="container mx-auto px-6 relative z-10 flex-1 flex items-center">
+          <div className="grid lg:grid-cols-2 gap-12 items-center w-full">
             {/* Left Side - Text Content */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
+              className="flex flex-col justify-center"
             >
               {/* Animated Title */}
               <motion.h1
-                className={`text-5xl md:text-6xl lg:text-7xl font-bold mb-6 ${
+                className={`text-6xl md:text-7xl lg:text-8xl font-bold mb-6 ${
                   glitch ? "animate-glitch" : ""
                 }`}
               >
@@ -69,6 +70,7 @@ const Home = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
                     className="inline-block gradient-text"
+                    style={{ animation: `float 3s ease-in-out infinite` }}
                   >
                     {char === " " ? "\u00A0" : char}
                   </motion.span>
@@ -108,58 +110,21 @@ const Home = () => {
                   </motion.div>
                 ))}
               </motion.div>
-
-              {/* CTA Buttons */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 2.5 }}
-                className="flex flex-col sm:flex-row gap-4"
-              >
-                <Link to="/projects">
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="px-8 py-4 bg-gradient-to-r from-primary via-secondary to-accent rounded-full text-white font-semibold shadow-lg glow"
-                  >
-                    Voir mes projets
-                  </motion.button>
-                </Link>
-
-                <Link to="/contact">
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="px-8 py-4 glass rounded-full font-semibold border border-primary hover:bg-primary/10 transition-colors"
-                  >
-                    Me contacter
-                  </motion.button>
-                </Link>
-
-                <a href="/CV/Cv_Dié_Niang1.pdf" download>
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="px-8 py-4 glass rounded-full font-semibold border border-secondary hover:bg-secondary/10 transition-colors"
-                  >
-                    Télécharger CV
-                  </motion.button>
-                </a>
-              </motion.div>
             </motion.div>
 
-            {/* Right Side - Profile Image */}
+            {/* Right Side - Profile Image alignée à droite */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
-              className="flex justify-center lg:justify-end"
+              className="flex justify-center lg:justify-end mt-[-1px] lg:mt-0"
             >
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                className="relative w-72 h-72 md:w-96 md:h-96"
+                className="relative w-[22rem] h-[22rem] md:w-[26rem] md:h-[26rem]"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-primary via-secondary to-accent rounded-full animate-pulse-slow opacity-75 blur-xl" />
+                <div className="absolute inset-0 rounded-full border-8 border-primary/40 animate-pulse-slow opacity-80 blur-xl" />
+                <div className="absolute inset-8 rounded-full border-4 border-primary/60 animate-pulse-slow opacity-60 blur-md" />
                 <motion.div
                   className="relative w-full h-full rounded-full overflow-hidden border-4 border-white/10 shadow-2xl"
                   whileHover={{ rotate: [0, 5, -5, 0] }}
@@ -175,21 +140,39 @@ const Home = () => {
             </motion.div>
           </div>
         </div>
-
-        {/* Scroll Indicator */}
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        >
-          <div className="w-6 h-10 border-2 border-primary rounded-full flex justify-center">
-            <motion.div
-              animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-              className="w-1 h-3 bg-primary rounded-full mt-2"
-            />
+        {/* Section boutons tout en bas, centrée */}
+        <div className="w-full flex flex-col items-center justify-end pb-8">
+          <div className="w-full max-w-2xl h-1 bg-gradient-to-r from-primary via-secondary to-accent rounded-full mb-8" />
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link to="/projects">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-4 bg-primary rounded-full text-white font-semibold shadow-lg glow"
+              >
+                Voir mes projets
+              </motion.button>
+            </Link>
+            <Link to="/contact">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-4 glass rounded-full font-semibold border border-primary hover:bg-primary/10 transition-colors"
+              >
+                Me contacter
+              </motion.button>
+            </Link>
+            <a href="/CV/Cv_Dié_Niang1.pdf" download>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-4 glass rounded-full font-semibold border border-secondary hover:bg-secondary/10 transition-colors"
+              >
+                Télécharger PDF
+              </motion.button>
+            </a>
           </div>
-        </motion.div>
+        </div>
       </section>
     </div>
   );

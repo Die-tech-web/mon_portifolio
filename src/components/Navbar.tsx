@@ -100,49 +100,49 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile Menu */}
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: "auto" }}
-          exit={{ opacity: 0, height: 0 }}
-          className="md:hidden glass mt-4"
-        >
-          <div className="container mx-auto px-6 py-6 flex flex-col gap-4">
-            {navItems.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                onClick={() => setIsOpen(false)}
+    {/* Mobile Menu */}
+    {isOpen && (
+      <motion.div
+        initial={{ opacity: 0, height: 0 }}
+        animate={{ opacity: 1, height: "auto" }}
+        exit={{ opacity: 0, height: 0 }}
+        className="md:hidden glass mt-4"
+      >
+        <div className="container mx-auto px-6 py-6 flex flex-col gap-4">
+          {navItems.map((item) => (
+            <Link
+              key={item.path}
+              to={item.path}
+              onClick={() => setIsOpen(false)}
+            >
+              <motion.div
+                whileHover={{ x: 10 }}
+                className={`text-lg font-medium transition-colors ${
+                  isActive(item.path) ? "text-primary" : "text-foreground/80"
+                }`}
               >
-                <motion.div
-                  whileHover={{ x: 10 }}
-                  className={`text-lg font-medium transition-colors ${
-                    isActive(item.path) ? "text-primary" : "text-foreground/80"
-                  }`}
-                >
-                  {item.name}
-                </motion.div>
-              </Link>
+                {item.name}
+              </motion.div>
+            </Link>
+          ))}
+          <div className="flex gap-4 justify-center pt-4 border-t border-white/10">
+            {socialLinks.map((social) => (
+              <motion.a
+                key={social.label}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.2, rotate: 360 }}
+                className="text-xl text-foreground/60 hover:text-primary transition-colors glow"
+              >
+                <social.icon />
+              </motion.a>
             ))}
-            <div className="flex gap-4 justify-center pt-4 border-t border-white/10">
-              {socialLinks.map((social) => (
-                <motion.a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.2, rotate: 360 }}
-                  className="text-xl text-foreground/60 hover:text-primary transition-colors glow"
-                >
-                  <social.icon />
-                </motion.a>
-              ))}
-            </div>
           </div>
-        </motion.div>
-      )}
-    </motion.nav>
+        </div>
+      </motion.div>
+    )}
+  </motion.nav>
   );
 };
 
